@@ -1,0 +1,15 @@
+{
+  "name": "team-task-manager",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=@team-task-manager/frontend",
+    "start": "npm run start --workspace=@team-task-manager/frontend",
+    "build:backend": "npm run build --workspace=@team-task-manager/backend",
+    "start:backend": "npm run start --workspace=@team-task-manager/backend"
+  }
+}
