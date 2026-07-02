@@ -156,7 +156,7 @@ App: `http://localhost:3000`
 2. **API service**: root directory `backend`, start `npm run build && npm start`, set env vars from `.env.example`.
 3. **Web service**: root directory `frontend`, build `npm run build`, start `npm start`, set `NEXT_PUBLIC_API_URL` to the API public URL + `/api`.
 4. Set API `CLIENT_URL` to the frontend public URL.
-5. Run migrations: `npx prisma migrate deploy` (Railway one-off or build step).
+5. Migrations run automatically on start via the backend `start` script (`prisma migrate deploy && node dist/index.js`); no separate pre-deploy step is required.
 
 ## API testing (curl)
 
