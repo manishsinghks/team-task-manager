@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------
+   LEDGER — design tokens (see /DESIGN.md)
+   Light is the default theme: warm paper, true ink, persimmon accent.
+   Elevation is a background step, never a shadow (overlays excepted).
+------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --paper: #faf8f4;
+  --raised: #ffffff;
+  --sunken: #f1eee7;
+  --flip: #1d1b16;
+
+  /* Ink */
+  --ink: #1d1b16;
+  --ink-2: #5c5850;
+  --ink-3: #8a857a;
+  --ink-flip: #f7f5f0;
+
+  /* Rules */
+  --rule: #e3dfd5;
+  --rule-2: #c9c4b8;
+
+  /* Accent — the stamp color */
+  --accent: #c8501e;
+  --accent-ink: #a03c12;
+  --accent-wash: #f6e4da;
+
+  /* Functional hues (text-safe) + washes */
+  --graphite: #6e6a61;
+  --ochre: #9a6b0f;
+  --ochre-wash: #f3e8ce;
+  --moss: #3f6c33;
+  --moss-wash: #e2ecdc;
+  --oxide: #a83226;
+  --oxide-wash: #f5deda;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --paper: #171512;
+  --raised: #201d19;
+  --sunken: #121110;
+  --flip: #f2efe8;
+
+  --ink: #ede9e0;
+  --ink-2: #a8a296;
+  --ink-3: #7c776c;
+  --ink-flip: #1d1b16;
+
+  --rule: #2e2b25;
+  --rule-2: #45413a;
+
+  --accent: #e06a33;
+  --accent-ink: #e8804f;
+  --accent-wash: #3a251b;
+
+  --graphite: #8a857a;
+  --ochre: #c9962e;
+  --ochre-wash: #332a17;
+  --moss: #7fa86b;
+  --moss-wash: #232b1e;
+  --oxide: #d9604f;
+  --oxide-wash: #37201d;
+}
+
+@theme inline {
+  --color-*: initial;
+  --color-paper: var(--paper);
+  --color-raised: var(--raised);
+  --color-sunken: var(--sunken);
+  --color-flip: var(--flip);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-flip: var(--ink-flip);
+  --color-rule: var(--rule);
+  --color-rule-2: var(--rule-2);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-wash: var(--accent-wash);
+  --color-graphite: var(--graphite);
+  --color-ochre: var(--ochre);
+  --color-ochre-wash: var(--ochre-wash);
+  --color-moss: var(--moss);
+  --color-moss-wash: var(--moss-wash);
+  --color-oxide: var(--oxide);
+  --color-oxide-wash: var(--oxide-wash);
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+
+  --font-sans: "Switzer", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-spline-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Radius: 0 panels · 3px controls · 6px overlays · round avatars */
+  --radius-ctl: 3px;
+  --radius-pop: 6px;
+
+  /* The only shadow in the system (level-3 overlays) */
+  --shadow-overlay: 0 12px 32px -12px rgb(29 27 22 / 0.35);
+
+  --animate-rise: rise 0.25s cubic-bezier(0.2, 0, 0, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Switzer", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hairlines by default — structure comes from rules, not boxes */
+* {
+  border-color: var(--rule);
+}
+
+/* Keyboard position is always the loudest thing on screen */
+:where(a, button, [role="button"], input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--accent-wash);
+  color: var(--ink);
+}
+
+/* Data always aligns into columns */
+.font-mono,
+input[type="date"],
+input[type="email"] {
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+/* Thin, theme-aware scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-2) transparent;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--rule-2);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
